@@ -414,7 +414,7 @@
 (defun parse-postgresql-version-string (version-string)
   "Parse PostgreSQL select version() output."
   (cl-ppcre:register-groups-bind (full-version maybe-variant)
-      ("PostgreSQL ([0-9.]+) [^,]+, [^,]+, (.*)" version-string)
+      ("PostgreSQL ([0-9.]+)(.*)" version-string)
     (let* ((version-dots  (split-sequence:split-sequence #\. full-version))
            (major-version (if (= 3 (length version-dots))
                               (format nil "~a.~a"
